@@ -14,7 +14,7 @@ Which runs automatically when you enter the interactive mode.
 ## General Commands 
 
 Most of the following commands' implementation exists in this [file][0]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `set_netlist <netlist>`   | | Sets the current netlist used by the flow to `<netlist>` |
@@ -92,7 +92,7 @@ Most of the following commands' implementation exists in this [file][1]
 ## Synthesis/Verilog Commands 
 
 Most of the following commands' implementation exists in this [file][9]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `get_yosys_bin` | | Returns the used binary for yosys. |
@@ -123,7 +123,7 @@ Most of the following commands' implementation exists in this [file][9]
 ## Floorplan Commands 
 
 Most of the following commands' implementation exists in this [file][3]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `init_floorplan_or` | | Runs floorplanning on the processed design using the openroad app. The resulting file is under `/<run_path>/tmp/floorplan/` . |
@@ -139,7 +139,7 @@ Most of the following commands' implementation exists in this [file][3]
 ## Placement Commands 
 
 Most of the following commands' implementation exists in this [file][7]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `global_placement_or` | | Runs global placement  on the processed design using the openroad app. The resulting file is under `/<run_path>/tmp/placement/` . |
@@ -156,7 +156,7 @@ Most of the following commands' implementation exists in this [file][7]
 ## CTS Commands 
 
 Most of the following commands' implementation exists in this [file][2]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `simple_cts` | | Runs clock tree synthesis using the simple cts application. The resulting file is under `/<run_path>/results/cts/` . <br> Not Advised to use. Legacy Command.|
@@ -175,7 +175,7 @@ Most of the following commands' implementation exists in this [file][2]
 ## Fill Insertion/Diode Insertion Commands
 
 Most of the following commands' implementation exists in this [file][8]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `ins_fill_cells_or` | | Runs fill insertion on the processed design using the openroad app. The resulting file is under `/<run_path>/tmp/routing/` . |
@@ -187,7 +187,7 @@ Most of the following commands' implementation exists in this [file][8]
 ## PDN Generation Commands
 
 Most of the following commands' implementation exists in this [file][8]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `gen_pdn` | | Runs power grid generation on the processed design using the openroad app. The resulting file is under `/<run_path>/tmp/routing/` . |
@@ -196,7 +196,7 @@ Most of the following commands' implementation exists in this [file][8]
 ## Routing Commands 
 
 Most of the following commands' implementation exists in this [file][8]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `global_routing_or` | | Runs global routing  on the processed design using the openroad app. The resulting file is under `/<run_path>/tmp/routing/` . |
@@ -209,7 +209,7 @@ Most of the following commands' implementation exists in this [file][8]
 ## Magic Commands 
 
 Most of the following commands' implementation exists in this [file][6]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `run_magic` | | Streams the final GDS and a mag view. The resulting file is under `/<run_path>/results/magic/` . |
@@ -223,7 +223,7 @@ Most of the following commands' implementation exists in this [file][6]
 ## LVS Commands 
 
 Most of the following commands' implementation exists in this [file][5]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `run_lvs` | | Runs an lvs check between an extracted spice netlist (so `run_magic_spice_export` should be run before it.) and the current verilog netlist of the processed design `CURRENT_NETLIST`. The resulting file is under `/<run_path>/results/lvs/` and `/<run_path>/reports/lvs/`. |
@@ -232,7 +232,7 @@ Most of the following commands' implementation exists in this [file][5]
 ## Utility Commands 
 
 Most of the following commands' implementation exists in these files: [deflef][10] and [general][12]
- 
+
 | Command      | Flags                   | Description                                           |
 |---------------|------------------------|-----------------------------------------|
 | `generate_final_summary_report` | | Generates a final summary csv report of the most important statistics and configurations in the run. This command is controlled by the flag `$::env(GENERATE_FINAL_SUMMARY_REPORT)`. | 
