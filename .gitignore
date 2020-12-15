@@ -19,3 +19,4 @@ macrocell.list
 
 # Sphinx
 */_build
+.autotoc.rst
