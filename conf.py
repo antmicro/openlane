@@ -14,7 +14,7 @@ import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
 from recommonmark.parser import CommonMarkParser
-sys.path.insert(0, os.path.abspath('../_ext'))
+sys.path.insert(0, os.path.abspath('docs/_ext'))
 
 # -- Project information -----------------------------------------------------
 
@@ -30,11 +30,13 @@ author = 'efabless'
 # ones.
 extensions = [
   'sphinx.ext.todo',
-  'recommonmark',
+  'markdown_code_links',
+  'markdown_cross_doc_section_links',
+  'sphinx.ext.autosectionlabel',
   'sphinx_markdown_tables',
   'image_links',
-  'markdown_code_links',
-  'toc_from_markdown'
+  'toc_from_markdown',
+  'recommonmark',
 ]
 
 # Expand source suffixes
@@ -60,6 +62,8 @@ templates_path = ['_templates']
 exclude_patterns = [
     '_build',
     'Thumbs.db',
+    'CONTRIBUTING.md',
+    'AUTHORS.md',
     # Files included in other rst files.
 ]
 
@@ -131,16 +135,18 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['docs/_static']
 
 todo_include_todos = True
 numfig = True
 markdown_code_links_githubrepo   = 'https://github.com/efabless/openlane'
 markdown_code_links_githubbranch = 'blob/master'
 markdown_code_links_codefileextensions = ['.tcl', '.sh', '.cfg', '.gds', '/', '.json', 'Makefile']
+autosectionlabel_prefix_document = True
 
 suppress_warnings = ['misc.highlighting_failure'] # supress json highlight warnings
 
-
 def setup(app):
-    app.emit("toc_from_markdown", 'index.md', '.autotoc.rst')
+    app.emit('create_index_softlink', 'README.md', True)
+    app.emit('toc_from_markdown', 'README.md', '.autotoc.rst', True)
+

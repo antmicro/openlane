@@ -19,11 +19,21 @@ import re
 import os
 import os.path as path
 
+cleanup_on_finish_files = []
+
 def setup(app):
+    app.add_event("create_index_softlink")
+    app.connect('create_index_softlink', index_softlink)
     app.add_event("toc_from_markdown")
     app.connect('toc_from_markdown', auto_generate_toc)
+    app.connect('build-finished', after_build_cleanup)
     return {'version': '1.0',
             'parallel_read_safe': True}
+
+def after_build_cleanup (app, exception):
+    for f in cleanup_on_finish_files:
+        os.remove (path.join (app.srcdir, f))
+        print (f'Deleted {f}')
  
 def extract_markdown_links (file):
     ''' Extracts list of local markdown links from markdown file'''
@@ -52,13 +62,17 @@ def extract_markdown_links (file):
 
     return links
 
-def auto_generate_toc (app, master, tocname, hidden = True, maxdepth=3):
+def auto_generate_toc (app, master, tocname, cleanup = False, hidden = True, maxdepth=3):
     """
     Automaticaly generate rst file with hidden toc'
     """
+    global cleanup_on_finish_files
+
+    if cleanup:
+       cleanup_on_finish_files.append(tocname)
+
     master  = path.join (app.srcdir, master)
     tocname = path.join (app.srcdir, path.basename (tocname))
-
     links = [master]
 
     while maxdepth:
@@ -85,6 +99,22 @@ def auto_generate_toc (app, master, tocname, hidden = True, maxdepth=3):
         for l in links:
             f.write( indent + l + '\n' )
 
+def index_softlink (app, master, cleanup = False):
+    global cleanup_on_finish_files
 
+    softlink = 'index.' + master.rpartition('.')[2] 
+    if cleanup:
+       cleanup_on_finish_files.append(softlink)
+
+    master  = path.join (app.srcdir, master)
+    softlink = path.join (app.srcdir, softlink)
+
+    try:
+        os.symlink (master, softlink)
+    except FileExistsError:
+        os.remove  (softlink)
+        os.symlink (master, softlink)
+    
+       
         
 
